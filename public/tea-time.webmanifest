@@ -4,16 +4,11 @@
   "description": "Personal Timer App for making Tea",
   "icons": [
     {
-      "src": "icons/icon-32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-512.png",
+      "src": "icon.svg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg"
     }
-  ],
+	],
   "start_url": "index.html",
   "display": "fullscreen",
   "theme_color": "lightgray",
