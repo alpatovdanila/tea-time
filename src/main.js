@@ -2,6 +2,8 @@ import { tick, ended, addTime, getTime, clear } from './ticker.js'
 import { delegatedHandler } from './lib/delegation.js'
 import { createSound } from './lib/sound.js'
 
+import './wakelock';
+
 import './style.css'
 
 ;(async () => {
