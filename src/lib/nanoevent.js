@@ -1,8 +1,8 @@
 export const createEvent = () => {
-    let handlers = new Set()
-    const event = (payload) => handlers.forEach(handler => handler(payload))
+  let handlers = new Set()
+  const event = (payload) => handlers.forEach((handler) => handler(payload))
 
-    event.addListener = handler => handlers.add(handler)
+  event.addListener = (handler) => handlers.add(handler)
 
-    return event
+  return event
 }

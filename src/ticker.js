@@ -1,34 +1,27 @@
-import {createEvent} from "./lib/nanoevent.js";
+import { createEvent } from './lib/nanoevent.js'
 
-let time = 0;
+let time = 0
 
-export const tick = createEvent();
-export const ended = createEvent();
+export const tick = createEvent()
+export const ended = createEvent()
 
-export const addTime = milliseconds => time += milliseconds;
+export const addTime = (milliseconds) => (time += milliseconds)
 
-export const getTime = () => time;
+export const getTime = () => time
 
 export const clear = () => {
-    time = 0;
-    tick()
+  time = 0
+  tick()
 }
 
+setInterval(() => {
+  if (time > 0) {
+    time -= 1000
+    tick()
+    if (time <= 0) ended()
+  }
 
-setInterval(()=>{
-    if(time > 0){
-        time -= 1000;
-        tick();
-        if(time <= 0) ended()
-    }
-
-    if(time < 0){
-        time = 0;
-    }
+  if (time < 0) {
+    time = 0
+  }
 }, 1000)
-
-
-
-
-
-
