@@ -1,0 +1,65 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+}
+
+body{
+  padding:0;
+  margin:0;
+  background:black;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap:10vmax;
+}
+
+.time{
+  font-size:30vmin;
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap:16px;
+}
+
+.button{
+  width:20vmax;
+  color:black;
+  font-size:5vmax;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  border:0;
+  background:lightgray;
+}
+
+.button_clear{
+  background:lightcoral;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #FFF;
+    background-color: #1b1b1b;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
