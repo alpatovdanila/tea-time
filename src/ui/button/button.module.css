@@ -1,0 +1,95 @@
+.button{
+    --height: 10px;
+    --color: white;
+    min-width:32px;
+    min-height:32px;
+    white-space: nowrap;
+    border:none;
+    width:100%;
+    height: 100%;
+    position: relative;
+    background:var(--color);
+    mask-repeat:no-repeat;
+
+}
+
+.text{
+    padding:0 8px;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    text-transform: uppercase;
+    font-size:7vmin;
+
+}
+
+.hidden{
+    opacity:0;
+}
+
+.hole{
+    display: inline-block;
+    user-select: none;
+}
+
+.button:active{
+    mask-position: 0 3px;
+
+
+}
+
+.button:active .topSurface{
+
+    mask-position: 1px -2px;
+    mask-size: calc(100% - 2px);
+    padding-top:6px;
+
+}
+
+.shadow{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background: rgba(0,0,0,0.15);
+
+}
+
+.topSurface{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    mask-position: 1px calc( 0px - var(--height) + 2px);
+    mask-repeat: no-repeat;
+    mask-size: calc(100% - 2px);
+    background:var(--color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.light {
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(255,255,255,0.25));
+}
+
+.default{
+    --color: #F9F9F9
+}
+
+.secondary{
+    --color: #D3CACA
+}
+
+.red{
+    --color: #FF2626;
+    color:white;
+}

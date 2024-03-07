@@ -1,0 +1,37 @@
+.counter{
+    font-family: 'Digital Numbers', monospace;
+    font-size:10vmax;
+    letter-spacing: -0.5vmax;
+    display: inline-flex;
+    align-items: center;
+}
+
+.small{
+    font-size:4vmax;
+    letter-spacing: -0.25vmax;
+}
+
+.dots{
+    color: var(--inactiveColor)
+}
+
+.activeDots{
+    color: currentColor;
+}
+
+.segments{
+    position: relative;
+    display: inline-block;
+}
+
+.activeSegments{
+    position:absolute;
+    top:0;
+    right:0;
+    color:currentColor;
+}
+
+.inactiveSegments{
+    color:var(--inactiveColor)
+
+}

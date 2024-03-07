@@ -1,0 +1,56 @@
+.screen{
+    --inactiveColor: #0B0B0B;
+    --activeColor: currentColor;
+    background:black;
+    color: #FFC003;
+    padding:10.66vmin;
+    width:100%;
+    gap:4.4vmin;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.previous{
+    flex: 0 1 auto;
+    display: flex;
+    gap: 1vmin;
+    align-items: center;
+    justify-content: right;
+
+}
+
+.countDown{
+    flex:1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap:4vmin;
+    align-items: end;
+    justify-content: center;
+}
+
+.total{
+    display: flex;
+    align-items: center;
+    gap:1vmin;
+}
+
+
+
+.indicators{
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap:8px;
+
+}
+
+.icon{
+    color: var(--inactiveColor)
+}
+
+.activeIcon{
+    color: var(--activeColor)
+}
+
