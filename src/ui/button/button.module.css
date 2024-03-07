@@ -1,0 +1,87 @@
+.button{
+    --height: 10px;
+    --color: white;
+    min-width:96px;
+    white-space: nowrap;
+    border:none;
+    height: 94px;
+    position: relative;
+    background:var(--color);
+    mask-repeat:no-repeat;
+}
+
+.text{
+    padding:0 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size:1rem;
+    text-shadow: rgba(0,0,0,0.4) 0 -1px;
+}
+
+.hidden{
+    opacity:0;
+}
+
+.hole{
+    display: inline-block;
+    user-select: none;
+}
+
+.button:active{
+    mask-position: 0 3px;
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.8);
+}
+
+.button:active .topSurface{
+
+    mask-position: 1px -2px;
+    mask-size: calc(100% - 2px);
+    padding-top:6px;
+
+}
+
+.shadow{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background: rgba(0,0,0,0.15);
+
+}
+
+.topSurface{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    mask-position: 1px calc( 0px - var(--height) + 2px);
+    mask-repeat: no-repeat;
+    mask-size: calc(100% - 2px);
+    background:var(--color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.light {
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.25));
+}
+
+.default{
+    --color: #F9F9F9
+}
+
+.red{
+    --color: #FF2626;
+    color:white;
+}
