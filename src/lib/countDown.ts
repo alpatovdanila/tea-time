@@ -1,19 +1,20 @@
 import { createEvent } from './nanoevent'
 import { createStore } from './nanostore'
-import { useEffect, useState } from 'preact/hooks'
+import { setPreciseInterval } from './preciseTimer/preciseTimer'
 
 type CountDownOptions = {
   tickInterval?: number
   nearEndTicks?: number
+  maxTicks?: number
 }
 
-type CountDownState = {
+export type CountDownState = {
   passed: number
   total: number
   left: number
 }
 
-const initialState = {
+export const initialState = {
   passed: 0,
   total: 0,
   left: 0,
@@ -22,22 +23,27 @@ const initialState = {
 export const createCountDown = ({
   tickInterval = 1,
   nearEndTicks = 5,
+  maxTicks = 1000,
 }: CountDownOptions = {}) => {
   const state = createStore<CountDownState>(initialState)
 
   const ended = createEvent()
   const nearEnded = createEvent()
 
-  let interval: number | null = null
+  let interval: (() => void) | null = null
 
   const add = (ticks: number) => {
     stopTicking()
 
-    state.set((old) => ({
-      ...old,
-      total: old.total + ticks,
-      left: old.total + ticks - old.passed,
-    }))
+    state.set((old) => {
+      const newTotal = Math.min(old.total + ticks, maxTicks)
+
+      return {
+        ...old,
+        total: newTotal,
+        left: newTotal - old.passed,
+      }
+    })
 
     startTicking()
   }
@@ -48,23 +54,24 @@ export const createCountDown = ({
 
     if (left === 0) {
       ended()
-      stopTicking()
+      clear()
+      return
     }
 
     if (left === nearEndTicks && nearEndTicks) nearEnded()
 
-    if (left >= 0) {
-      state.set((old) => ({
+    state.set((old) => {
+      return {
         ...old,
         passed,
         left,
-      }))
-    }
+      }
+    })
   }
 
-  const stopTicking = () => interval && clearInterval(interval)
+  const stopTicking = () => interval && interval()
 
-  const startTicking = () => (interval = setInterval(tick, tickInterval))
+  const startTicking = () => (interval = setPreciseInterval(tick, tickInterval))
 
   const clear = () => {
     stopTicking()
@@ -80,12 +87,4 @@ export const createCountDown = ({
   }
 }
 
-type CountDown = ReturnType<typeof createCountDown>
-
-export const useCountDown = (countDown: CountDown) => {
-  const [state, setState] = useState(countDown.state.get())
-
-  useEffect(() => countDown.state.addListener(setState), [])
-
-  return state
-}
+export type CountDown = ReturnType<typeof createCountDown>

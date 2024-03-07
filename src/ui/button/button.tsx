@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'preact'
 import { cn } from '../../lib/cn'
 import styles from './button.module.css'
-import { useSquircle } from '../../model/squircle'
-import { createRef } from 'react'
+import { useSquircle } from '../../services/squircle'
+import { createRef, CSSProperties } from 'react'
 
 export enum ButtonVariants {
   default,
@@ -11,20 +11,22 @@ export enum ButtonVariants {
 }
 
 type Props = {
-  variant: ButtonVariants
+  variant?: ButtonVariants
   onClick: () => void
+  style?: CSSProperties
 }
 
 export const Button: FunctionComponent<Props> = ({
   variant = ButtonVariants.default,
   onClick,
   children,
+  style,
 }) => {
   const ref = createRef()
 
   const squircleProps = useSquircle({
     ref,
-    borderRadius: 32,
+    borderRadius: 64,
     smoothness: 0.5,
   })
 
@@ -36,7 +38,12 @@ export const Button: FunctionComponent<Props> = ({
   )
 
   return (
-    <div className={styles.hole} {...squircleProps} onClick={onClick}>
+    <div
+      className={styles.hole}
+      {...squircleProps}
+      onClick={onClick}
+      style={style}
+    >
       <button className={className} ref={ref} {...squircleProps}>
         {/*absolutely positioned "real" text, being absolutely positioned, does not declare size of button container
         so there is hidden text of the same size and width that is direct child of button and positioned relatively*/}

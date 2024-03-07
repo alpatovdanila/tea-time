@@ -1,26 +1,23 @@
-import { Button, ButtonVariants } from './ui/button'
-
-import { counter } from './model/counter'
-import { useCountDown } from './lib/countDown'
+import { useEffect, useRef } from 'preact/hooks'
+import { appStarted } from './model/app'
+import { Screen } from './components/screen/screen'
+import { Controls } from './components/controls/controls'
+import styles from './app.module.css'
+import { useSquircle } from './services/squircle'
 
 export function App() {
-  const state = useCountDown(counter)
+  useEffect(appStarted, [])
+  const ref = useRef<HTMLDivElement>(null)
+  const squircle = useSquircle({ ref, borderRadius: 32, smoothness: 0.5 })
 
   return (
-    <div>
-      <h1>
-        {state.left}/{state.total}
-      </h1>
-      <Button variant={ButtonVariants.default} onClick={() => counter.add(10)}>
-        +10
-      </Button>
-
-      <Button variant={ButtonVariants.default} onClick={() => counter.add(20)}>
-        +20
-      </Button>
-      <Button variant={ButtonVariants.default} onClick={() => counter.clear()}>
-        reset
-      </Button>
+    <div className={styles.app} {...squircle} ref={ref}>
+      <div className={styles.top}>
+        <Screen />
+      </div>
+      <div className={styles.bottom}>
+        <Controls />
+      </div>
     </div>
   )
 }

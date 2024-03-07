@@ -1,0 +1,10 @@
+.controls{
+    gap:3.3vmin;
+    display: inline-grid;
+    grid-template-columns: 26.666vmin 26.666vmin 26.666vmin;
+    grid-template-rows: 26.666vmin 26.666vmin 26.666vmin;
+    grid-template-areas:
+        ". . ."
+        ". . clear"
+        ". . clear";
+}

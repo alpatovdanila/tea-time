@@ -1,4 +1,5 @@
 import { createEvent, Event, NanoEventListener } from './nanoevent'
+import { useEffect, useState } from 'preact/hooks'
 
 type ValueReducer<T, E> = (oldValue: T, eventValue: E) => T
 
@@ -11,7 +12,8 @@ export const createStore = <T>(initialValue: T) => {
   const get = () => value
 
   const set = (setter: ValueSetter<T>) => {
-    event((value = setter(get())))
+    const newValue = setter(value)
+    if (newValue !== value) event((value = newValue))
   }
 
   const addListener = (listener: NanoEventListener<T>) => {
@@ -31,4 +33,12 @@ export const createStore = <T>(initialValue: T) => {
     get,
     set,
   }
+}
+
+type Store<T> = ReturnType<typeof createStore<T>>
+
+export const useStore = <T>(store: Store<T>) => {
+  const [state, setState] = useState<T>(store.get())
+  useEffect(() => store.addListener(setState), [store])
+  return state
 }

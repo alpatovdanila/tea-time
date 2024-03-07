@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+
+
+body{
+    padding: 0;
+    margin:0;
+    background:black;
+    overscroll-behavior: none;
+    overflow: hidden;
+}
+
+html{
+    touch-action: manipulation;
+    user-select:none;
+}
+
+@font-face {
+    font-family: 'Digital Numbers';
+    font-style: normal;
+    font-weight: 400;
+    src: local("Digital Numbers"), url('./assets/DigitalNumbers-Regular.ttf') format("woff")
+}

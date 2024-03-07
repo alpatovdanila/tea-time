@@ -1,6 +1,0 @@
-.button{
-    --background-image: 'no';
-    mask-image: var(--background-image);
-    border:none;
-
-}

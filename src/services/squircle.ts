@@ -15,17 +15,18 @@ export const useSquircle = ({ ref, borderRadius, smoothness }: Props) => {
   const [attributes, setAttributes] = useState<SquircleTargetAttributes>({})
 
   useEffect(() => {
-    if (ref.current) {
+    const element = ref.current
+    if (element) {
       const squircleMask = createSquircleMask(0, 0, borderRadius, smoothness)
 
       setAttributes(squircleMask.targetAtributes)
 
-      resizeObserver.observe(ref.current, ({ width, height }) => {
+      resizeObserver.observe(element, ({ width, height }) => {
         squircleMask.update(width, height, borderRadius, smoothness)
       })
 
       return () => {
-        resizeObserver.unobserve(ref.current)
+        resizeObserver.unobserve(element)
         squircleMask.remove()
       }
     }
