@@ -1,21 +1,34 @@
-const resizeListeners = new Map()
+export type ResizeObserverSize = { width: number; height: number }
 
-const resizeObserver = new ResizeObserver((entries) => {
-  entries.forEach((entry) => {
-    const listener = resizeListeners.get(entry.target)
-    if (listener) listener(entry.borderBoxSize[0])
+export const createResizeObserver = () => {
+  const resizeListeners = new Map()
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    entries.forEach((entry) => {
+      const listener = resizeListeners.get(entry.target)
+      if (listener)
+        listener({
+          width: entry.borderBoxSize[0].inlineSize,
+          height: entry.borderBoxSize[0].blockSize,
+        })
+    })
   })
-})
 
-export const observe = (
-  element: HTMLElement,
-  listener: (size: ResizeObserverSize) => void,
-) => {
-  resizeObserver.observe(element)
-  resizeListeners.set(element, listener)
-}
+  const observe = (
+    element: HTMLElement,
+    onResize: (size: ResizeObserverSize) => void,
+  ) => {
+    resizeObserver.observe(element)
+    resizeListeners.set(element, onResize)
+  }
 
-export const unobserve = (element: HTMLElement) => {
-  resizeObserver.unobserve(element)
-  resizeListeners.delete(element)
+  const unobserve = (element: HTMLElement) => {
+    resizeObserver.unobserve(element)
+    resizeListeners.delete(element)
+  }
+
+  return {
+    observe,
+    unobserve,
+  }
 }

@@ -1,15 +1,26 @@
-import { Button, ButtonVariants } from "./ui/button";
-import { useState } from "react";
+import { Button, ButtonVariants } from './ui/button'
+
+import { counter } from './model/counter'
+import { useCountDown } from './lib/countDown'
 
 export function App() {
-  const [text, setText] = useState("");
+  const state = useCountDown(counter)
+
   return (
     <div>
-      <input value={text} onChange={(e) => setText(e.target.value)} />
-      <Button variant={ButtonVariants.default}>{text}</Button>
-      <Button variant={ButtonVariants.default}>{text}</Button>
-      <Button variant={ButtonVariants.default}>{text}</Button>
-      <Button variant={ButtonVariants.default}>{text}</Button>
+      <h1>
+        {state.left}/{state.total}
+      </h1>
+      <Button variant={ButtonVariants.default} onClick={() => counter.add(10)}>
+        +10
+      </Button>
+
+      <Button variant={ButtonVariants.default} onClick={() => counter.add(20)}>
+        +20
+      </Button>
+      <Button variant={ButtonVariants.default} onClick={() => counter.clear()}>
+        reset
+      </Button>
     </div>
-  );
+  )
 }
