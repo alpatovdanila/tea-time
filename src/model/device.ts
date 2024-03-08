@@ -1,8 +1,7 @@
+import { counter } from './counter'
+import { $soundEnabled, $vibrationEnabled } from './userPreferences'
 import { Sound, soundManager } from '../ui/sound'
 import { lockScreenSleep, vibrate } from '../lib/device'
-import { counter } from './counter'
-
-import { $soundEnabled, $vibrationEnabled } from './userPreferences'
 import { appStarted } from './app'
 
 counter.nearEnded.addListener(async () => {

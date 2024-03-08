@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'preact/hooks'
-import { appStarted } from './model/app'
-import { Screen } from './components/screen/screen'
-import { Controls } from './components/controls/controls'
+import { appStarted } from '../model/app'
+import { Screen } from '../components/screen/screen'
+import { Controls } from '../components/controls/controls'
 import styles from './app.module.css'
-import { useSquircle } from './services/squircle'
+import '../model/device'
+
+import { useSquircle } from '../services/squircle'
 
 export function App() {
   useEffect(appStarted, [])
