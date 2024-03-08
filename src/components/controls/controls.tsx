@@ -1,8 +1,9 @@
 import { Button, ButtonVariants } from '../../ui/button'
 import { add, reset } from '../../model/counter'
-import { toggleSound, toggleVibration } from '../../model/app'
+
 import { Trash2, Volume2, Waves } from 'lucide-react'
 import styles from './controls.module.css'
+import { toggleSound, toggleVibration } from '../../model/userPreferences'
 
 export const Controls = () => {
   return (

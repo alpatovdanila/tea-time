@@ -1,6 +1,6 @@
 import { $counter, $previous } from '../../model/counter'
-import { useStore } from '../../lib/nanostore'
-import { $errors, $soundEnabled, $vibrationEnabled } from '../../model/app'
+import { useStore } from '../../lib/naniteReact'
+
 import styles from './screen.module.css'
 import { Counter, CounterVariant } from './counter'
 import {
@@ -12,6 +12,8 @@ import {
   Waves,
 } from 'lucide-react'
 import { cn } from '../../lib/cn'
+import { $soundEnabled, $vibrationEnabled } from '../../model/userPreferences'
+import { $errors } from '../../model/errors'
 
 export const Screen = () => {
   const timer = useStore($counter)

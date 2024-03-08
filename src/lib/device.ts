@@ -1,4 +1,5 @@
-import { errorHappened, ErrorType } from '../model/app'
+import { ErrorType } from '../model/app'
+import { errorHappened } from '../model/errors'
 
 export const lockScreenSleep = async () => {
   let lock: WakeLockSentinel | null = null

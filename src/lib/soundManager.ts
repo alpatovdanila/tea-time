@@ -1,9 +1,9 @@
-import { createStore } from './nanostore'
+import { createStore } from './nanite'
 import { loadAudio } from './sound'
 
-type SoundsAssetsMap = Record<string, string>
-
-export const createSoundManager = (assets: SoundsAssetsMap) => {
+export const createSoundManager = <T extends Record<string, string>>(
+  assets: T,
+) => {
   const isReady = createStore(false)
 
   const audios: Record<string, HTMLAudioElement> = {}
@@ -17,9 +17,9 @@ export const createSoundManager = (assets: SoundsAssetsMap) => {
     isReady.set(() => true)
   }
 
-  const play = (name: string) => {
+  const play = (name: keyof T) => {
     if (isReady.get() && name in audios) {
-      const audio = audios[name]
+      const audio = audios[name as keyof typeof audios]
       audio.currentTime = 0
       return audio.play()
     }

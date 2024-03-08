@@ -1,5 +1,6 @@
 import { createCountDown } from '../lib/countDown'
-import { createStore } from '../lib/nanostore'
+
+import { createPersistedStore } from '../services/storage'
 
 export const counter = createCountDown({
   tickInterval: 1000,
@@ -11,6 +12,6 @@ export const add = counter.add
 export const reset = counter.clear
 
 export const $counter = counter.state
-export const $previous = createStore(0)
+export const $previous = createPersistedStore(0, 'lastCounter')
 
 $previous.on(counter.ended, () => $counter.get().total)

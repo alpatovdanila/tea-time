@@ -6,34 +6,36 @@
   somethingHappened()
 */
 
-export type NanoEventListener<E> = (payload: E) => void
+export type NanoEventHandler<E> = (payload: E) => void
+
+type InlineUnsubscribeFn = () => void
 
 export type EventMethods<E> = {
-  addListener: (listener: NanoEventListener<E>) => void
-  addOnceListener: (listener: NanoEventListener<E>) => void
+  addListener: (listener: NanoEventHandler<E>) => InlineUnsubscribeFn
+  addOnceListener: (listener: NanoEventHandler<E>) => InlineUnsubscribeFn
   reset: () => void
 }
 
-export type Event<E> = EventMethods<E> & {
+export type Event<E> = {
   (payload: E): void
-}
+} & EventMethods<E>
 
 export const createEvent = <T = void>(): Event<T> => {
-  const subscribers = new Set<NanoEventListener<T>>()
+  const subscribers = new Set<NanoEventHandler<T>>()
 
   const event: Event<T> = (payload: T) =>
     [...subscribers].forEach((sub) => sub(payload))
 
-  const removeListener = (listener: NanoEventListener<T>) =>
+  const removeListener = (listener: NanoEventHandler<T>) =>
     subscribers.delete(listener)
 
-  event.addListener = (listener: NanoEventListener<T>) => {
+  event.addListener = (listener: NanoEventHandler<T>) => {
     subscribers.add(listener)
     return () => removeListener(listener)
   }
 
-  event.addOnceListener = (listener: NanoEventListener<T>) => {
-    const disposableListener: NanoEventListener<T> = (payload) => {
+  event.addOnceListener = (listener: NanoEventHandler<T>) => {
+    const disposableListener: NanoEventHandler<T> = (payload) => {
       listener(payload)
       removeListener(disposableListener)
     }

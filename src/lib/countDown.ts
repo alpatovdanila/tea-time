@@ -1,5 +1,5 @@
-import { createEvent } from './nanoevent'
-import { createStore } from './nanostore'
+import { createEvent, createStore } from './nanite'
+
 import { setPreciseInterval } from './preciseTimer/preciseTimer'
 
 type CountDownOptions = {

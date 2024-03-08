@@ -1,52 +1,12 @@
-import { createEvent } from '../lib/nanoevent'
-import { createStore } from '../lib/nanostore'
-import { lockScreenSleep, vibrate } from '../lib/device'
-import { counter } from './counter'
-import { soundManager } from '../ui/sound'
-
-export enum ErrorType {
-  warning,
-  critical,
-  debug,
-}
-
-type Error = { type: ErrorType; title: string; text: string; err: unknown }
-
-export const $errors = createStore<Array<Error>>([])
-
-export const errorHappened = createEvent<Error>()
-
-$errors.on(errorHappened, (errors, newError) => [...errors, newError])
-$errors.addListener(console.log)
+import { createEvent } from '../lib/nanite'
+import { add, reset } from './counter'
 
 export const appStarted = createEvent()
 
-appStarted.addListener(lockScreenSleep)
-
-export const $soundEnabled = createStore(true)
-export const $vibrationEnabled = createStore(false)
-
-export const toggleSound = createEvent()
-export const toggleVibration = createEvent()
-
-$soundEnabled.on(toggleSound, (old) => !old)
-$vibrationEnabled.on(toggleVibration, (old) => !old)
-
-$vibrationEnabled.addListener((enabled) => {
-  if (enabled) vibrate(300)
-})
-
-counter.nearEnded.addListener(async () => {
-  if ($soundEnabled.get()) await soundManager.play('done')
-  if ($vibrationEnabled.get()) vibrate(300)
-})
-
-counter.ended.addListener(() => {
-  if ($soundEnabled.get()) {
-    soundManager.play('done')
-    setTimeout(() => {
-      soundManager.play('done')
-    }, 200)
+appStarted.addListener(() => {
+  const start = new URL(document.location.href).searchParams.get('start')
+  if (start) {
+    reset()
+    add(Number(start))
   }
-  if ($vibrationEnabled.get()) vibrate(500)
 })
