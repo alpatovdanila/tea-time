@@ -6,14 +6,23 @@
   somethingHappened()
 */
 
-export type NanoEventListener<T> = (payload: T) => void
+export type NanoEventListener<E> = (payload: E) => void
 
-export type Event<E> = ReturnType<typeof createEvent<E>>
+export type EventMethods<E> = {
+  addListener: (listener: NanoEventListener<E>) => void
+  addOnceListener: (listener: NanoEventListener<E>) => void
+  reset: () => void
+}
 
-export const createEvent = <T = void>() => {
+export type Event<E> = EventMethods<E> & {
+  (payload: E): void
+}
+
+export const createEvent = <T = void>(): Event<T> => {
   const subscribers = new Set<NanoEventListener<T>>()
 
-  const event = (payload: T) => [...subscribers].forEach((sub) => sub(payload))
+  const event: Event<T> = (payload: T) =>
+    [...subscribers].forEach((sub) => sub(payload))
 
   const removeListener = (listener: NanoEventListener<T>) =>
     subscribers.delete(listener)

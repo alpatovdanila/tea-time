@@ -10,7 +10,7 @@ export const Controls = () => {
       <Button onClick={() => add(60)}>60</Button>
       <Button onClick={() => add(30)}>30</Button>
       <Button onClick={() => add(15)}>15</Button>
-      <Button onClick={() => add(15)}>10</Button>
+      <Button onClick={() => add(10)}>10</Button>
       <Button onClick={() => add(5)}>5</Button>
       <Button
         onClick={() => reset()}

@@ -1,7 +1,5 @@
 import { errorHappened, ErrorType } from '../model/app'
 
-navigator.wakeLock.request = () => Promise.reject()
-
 export const lockScreenSleep = async () => {
   let lock: WakeLockSentinel | null = null
 

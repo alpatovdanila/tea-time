@@ -2,7 +2,7 @@ import { createEvent } from '../lib/nanoevent'
 import { createStore } from '../lib/nanostore'
 import { lockScreenSleep, vibrate } from '../lib/device'
 import { counter } from './counter'
-import { soundManager } from '../ui/sounds'
+import { soundManager } from '../ui/sound'
 
 export enum ErrorType {
   warning,
@@ -17,6 +17,7 @@ export const $errors = createStore<Array<Error>>([])
 export const errorHappened = createEvent<Error>()
 
 $errors.on(errorHappened, (errors, newError) => [...errors, newError])
+$errors.addListener(console.log)
 
 export const appStarted = createEvent()
 
@@ -31,15 +32,21 @@ export const toggleVibration = createEvent()
 $soundEnabled.on(toggleSound, (old) => !old)
 $vibrationEnabled.on(toggleVibration, (old) => !old)
 
+$vibrationEnabled.addListener((enabled) => {
+  if (enabled) vibrate(300)
+})
+
 counter.nearEnded.addListener(async () => {
   if ($soundEnabled.get()) await soundManager.play('done')
   if ($vibrationEnabled.get()) vibrate(300)
 })
 
-counter.ended.addListener(async () => {
+counter.ended.addListener(() => {
   if ($soundEnabled.get()) {
-    await soundManager.play('done')
-    await soundManager.play('done')
+    soundManager.play('done')
+    setTimeout(() => {
+      soundManager.play('done')
+    }, 200)
   }
   if ($vibrationEnabled.get()) vibrate(500)
 })

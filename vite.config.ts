@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [
     preact(),
     VitePWA({
+      injectManifest: {},
       registerType: 'autoUpdate',
       manifest: {
         name: 'Tea Time',
