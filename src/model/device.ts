@@ -2,7 +2,8 @@ import { counter } from './counter'
 import { $soundEnabled, $vibrationEnabled } from './userPreferences'
 import { Sound, soundManager } from '../ui/sound'
 import { lockScreenSleep, vibrate } from '../lib/device'
-import { appStarted } from './app'
+
+let revokeScreenSleepLock: null | (() => void) = null
 
 counter.nearEnded.addListener(async () => {
   if ($soundEnabled.get()) soundManager.play(Sound.caution)
@@ -20,4 +21,8 @@ $vibrationEnabled.addListener((enabled) => {
   if (enabled) vibrate(300)
 })
 
-appStarted.addListener(lockScreenSleep)
+counter.started.addListener(async () => {
+  revokeScreenSleepLock = await lockScreenSleep()
+})
+
+counter.ended.addListener(() => revokeScreenSleepLock?.())

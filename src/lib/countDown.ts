@@ -29,6 +29,7 @@ export const createCountDown = ({
 
   const ended = createEvent()
   const nearEnded = createEvent()
+  const started = createEvent()
 
   let interval: (() => void) | null = null
 
@@ -71,7 +72,10 @@ export const createCountDown = ({
 
   const stopTicking = () => interval && interval()
 
-  const startTicking = () => (interval = setPreciseInterval(tick, tickInterval))
+  const startTicking = () => {
+    started()
+    interval = setPreciseInterval(tick, tickInterval)
+  }
 
   const clear = () => {
     stopTicking()
@@ -82,6 +86,7 @@ export const createCountDown = ({
     add,
     state,
     ended,
+    started,
     clear,
     nearEnded,
   }

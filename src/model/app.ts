@@ -4,9 +4,9 @@ import { add, reset } from './counter'
 export const appStarted = createEvent()
 
 appStarted.addListener(() => {
-  const start = new URL(document.location.href).searchParams.get('start')
-  if (start) {
+  const startingTime = new URL(document.location.href).searchParams.get('start')
+  if (startingTime) {
     reset()
-    add(Number(start))
+    add(Number(startingTime))
   }
 })
