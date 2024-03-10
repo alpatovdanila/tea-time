@@ -1,95 +1,78 @@
-.button{
-    --height: 10px;
-    --color: white;
-    min-width:32px;
-    min-height:32px;
-    white-space: nowrap;
-    border:none;
-    width:100%;
-    height: 100%;
-    position: relative;
-    background:var(--color);
-    mask-repeat:no-repeat;
+.button {
+  --height: 10px;
+  --color: white;
 
+  min-width: 32px;
+  min-height: 32px;
+  white-space: nowrap;
+  border: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--color);
+  mask-repeat: no-repeat;
 }
 
-.text{
-    padding:0 8px;
-    font-family: "M PLUS Rounded 1c", sans-serif;
-    text-transform: uppercase;
-    font-size:7vmin;
-
+.text {
+  padding: 0 8px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: uppercase;
+  font-size: 7vmin;
 }
 
-.hidden{
-    opacity:0;
+.hidden {
+  opacity: 0;
 }
 
-.hole{
-    display: inline-block;
-    user-select: none;
+.hole {
+  display: inline-block;
+  user-select: none;
 }
 
-.button:active{
-    mask-position: 0 3px;
-
-
+.button:active {
+  mask-position: 0 3px;
 }
 
-.button:active .topSurface{
-
-    mask-position: 1px -2px;
-    mask-size: calc(100% - 2px);
-    padding-top:6px;
-
+.button:active .topSurface {
+  mask-position: 1px -2px;
+  mask-size: calc(100% - 2px);
+  padding-top: 6px;
 }
 
-.shadow{
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    background: rgba(0,0,0,0.15);
-
+.shadow {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 15%);
 }
 
-.topSurface{
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    mask-position: 1px calc( 0px - var(--height) + 2px);
-    mask-repeat: no-repeat;
-    mask-size: calc(100% - 2px);
-    background:var(--color);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.topSurface {
+  position: absolute;
+  inset: 0;
+  mask-position: 1px calc(0px - var(--height) + 2px);
+  mask-repeat: no-repeat;
+  mask-size: calc(100% - 2px);
+  background: var(--color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-
 
 .light {
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(255,255,255,0.25));
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgb(0 0 0 / 10%), rgb(255 255 255 / 25%));
 }
 
-.default{
-    --color: #F9F9F9
+.default {
+  --color: #f9f9f9;
 }
 
-.secondary{
-    --color: #D3CACA
+.secondary {
+  --color: #d3caca;
 }
 
-.red{
-    --color: #FF2626;
-    color:white;
+.red {
+  --color: #ff2626;
+
+  color: white;
 }
