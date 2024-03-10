@@ -10,10 +10,10 @@ import { useSquircle } from '../services/squircle'
 export function App() {
   useEffect(appStarted, [])
   const ref = useRef<HTMLDivElement>(null)
-  const squircle = useSquircle({ ref, borderRadius: 32, smoothness: 0.5 })
+  const squircledProps = useSquircle({ ref, borderRadius: 32, smoothness: 0.5 })
 
   return (
-    <div className={styles.app} {...squircle} ref={ref}>
+    <div className={styles.app} {...squircledProps} ref={ref}>
       <div className={styles.top}>
         <Screen />
       </div>
