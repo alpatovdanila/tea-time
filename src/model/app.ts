@@ -10,11 +10,3 @@ appStarted.addListener(() => {
     add(Number(start))
   }
 })
-
-document.body.onclick = () => {
-  Notification.requestPermission().then(() => {
-    if (Notification.permission === 'granted') {
-      new Notification('Hi there!')
-    }
-  })
-}
