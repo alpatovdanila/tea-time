@@ -31,10 +31,28 @@ export default defineConfig({
             purpose: 'maskable',
           },
           {
+            src: 'maskable.svg',
+            sizes: 'any',
+            type: 'image/svg',
+            purpose: 'any',
+          },
+          {
             src: 'icon-512.png',
             sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any',
+            type: 'image/svg',
+            purpose: 'maskable',
+          },
+          {
+            src: 'icon-192.svg',
+            sizes: '192x192',
+            type: 'image/svg',
+            purpose: 'maskable',
+          },
+          {
+            src: 'icon-144.svg',
+            sizes: '144x144',
+            type: 'image/svg',
+            purpose: 'maskable',
           },
           {
             src: 'icon-144.png',
@@ -43,10 +61,10 @@ export default defineConfig({
             purpose: 'any',
           },
           {
-            src: 'icon-72.png',
+            src: 'icon-72.svg',
             sizes: '72x72',
-            type: 'image/png',
-            purpose: 'any',
+            type: 'image/svg',
+            purpose: 'maskable',
           },
         ],
         shortcuts: [
