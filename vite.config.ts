@@ -23,100 +23,51 @@ export default defineConfig({
         description: 'Tea brewing infusion timer',
         theme_color: '#000000',
         orientation: 'any',
-        icons: [
+        icons: [72, 144, 192, 512].flatMap((size) => [
           {
-            src: 'maskable.svg',
-            sizes: 'any',
+            src: `icons/maskable/icon-${size}.svg`,
+            sizes: `${size}x${size}`,
             type: 'image/svg',
             purpose: 'maskable',
           },
           {
-            src: 'maskable.svg',
-            sizes: 'any',
+            src: `icons/maskable/icon-${size}.png`,
+            sizes: `${size}x${size}`,
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: `icons/shaped/icon-${size}.svg`,
+            sizes: `${size}x${size}`,
             type: 'image/svg',
             purpose: 'any',
           },
           {
-            src: 'icon-512.png',
-            sizes: '512x512',
-            type: 'image/svg',
-            purpose: 'maskable',
-          },
-          {
-            src: 'icon-192.svg',
-            sizes: '192x192',
-            type: 'image/svg',
-            purpose: 'maskable',
-          },
-          {
-            src: 'icon-144.svg',
-            sizes: '144x144',
-            type: 'image/svg',
-            purpose: 'maskable',
-          },
-          {
-            src: 'icon-144.png',
-            sizes: '144x144',
+            src: `icons/shaped/icon-${size}.png`,
+            sizes: `${size}x${size}`,
             type: 'image/png',
             purpose: 'any',
           },
-          {
-            src: 'icon-72.svg',
-            sizes: '72x72',
-            type: 'image/svg',
-            purpose: 'maskable',
-          },
-        ],
-        shortcuts: [
-          {
-            name: '60s',
-            url: '?start=60',
-            description: 'Start 60 seconds timer',
-            icons: [
-              {
-                src: 'start-60.svg',
-                sizes: '96x96',
-                purpose: 'maskable',
-              },
-            ],
-          },
-          {
-            name: '30s',
-            url: '?start=30',
-            description: 'Start 30 seconds timer',
-            icons: [
-              {
-                src: 'start-30.svg',
-                sizes: '96x96',
-                purpose: 'maskable',
-              },
-            ],
-          },
-          {
-            name: '15s',
-            url: '?start=15',
-            description: 'Start 15 seconds timer',
-            icons: [
-              {
-                src: 'start-15.svg',
-                sizes: '96x96',
-                purpose: 'maskable',
-              },
-            ],
-          },
-          {
-            name: '5s',
-            url: '?start=5',
-            description: 'Start 5 seconds timer',
-            icons: [
-              {
-                src: 'start-5.svg',
-                sizes: '96x96',
-                purpose: 'maskable',
-              },
-            ],
-          },
-        ],
+        ]),
+        shortcuts: [60, 30, 15, 5].map((time) => ({
+          name: `${time}s`,
+          url: `?start=${time}`,
+          description: `Start ${time} seconds timer`,
+          icons: [
+            {
+              src: `icons/shortcuts/${time}.svg`,
+              sizes: '96x96',
+              purpose: 'any',
+              type: 'image/svg',
+            },
+            {
+              src: `icons/shortcuts/${time}.png`,
+              sizes: '96x96',
+              purpose: 'any',
+              type: 'image/png',
+            },
+          ],
+        })),
       },
     }),
   ],
