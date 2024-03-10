@@ -21,7 +21,7 @@ export default defineConfig({
         background_color: '#000000',
         lang: 'en-US',
         description: 'Tea brewing infusion timer',
-        theme_color: 'transparent',
+        theme_color: '#000000',
         orientation: 'any',
         icons: [
           {
