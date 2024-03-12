@@ -4,10 +4,11 @@ type ValueReducer<T, E> = (oldValue: T, eventValue: E) => T
 
 type ValueSetter<T> = (oldValue: T) => T
 
-export type NanoStore<T> = EventMethods<T> & {
+export type NanoStore<T> = Omit<EventMethods<T>, 'reset'> & {
   on: <E>(event: Event<E>, reducer: ValueReducer<T, E>) => void
   get: () => T
   set: (setter: ValueSetter<T>) => void
+  reset: (event: Event<T>) => void
 }
 
 export const createStore = <T>(initialValue: T): NanoStore<T> => {
@@ -31,8 +32,13 @@ export const createStore = <T>(initialValue: T): NanoStore<T> => {
       set((oldValue) => reducer(oldValue, eventValue)),
     )
 
+  const reset = (event: Event<T>) => {
+    event.addListener((value) => set(() => value))
+  }
+
   return {
     ...event,
+    reset,
     addListener,
     on,
     get,

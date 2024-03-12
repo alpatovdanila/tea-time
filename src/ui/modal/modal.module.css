@@ -1,0 +1,56 @@
+.overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(2px);
+}
+
+.modal {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    max-width: 95vw;
+    min-width: 70vw;
+    max-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+.header {
+    font-size: 7vmin;
+    padding: 4vmin;
+}
+
+
+
+.content {
+    padding: 0 4vmin 0 4vmin;
+    font-size:4vmin;
+    flex:auto;
+    overflow-y:auto;
+}
+
+
+.content h4{
+    font-size:4vmin;
+    margin:0;
+    padding:0;
+    font-weight: bold;
+}
+
+.content ul{
+
+}
+
+.footer {
+    width:100%;
+    text-align: center;
+    padding: 4vmin;
+}

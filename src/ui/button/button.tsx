@@ -13,6 +13,7 @@ export enum ButtonVariants {
 type Props = {
   variant?: ButtonVariants
   onClick: () => void
+  block?: boolean
   style?: CSSProperties
 }
 
@@ -20,6 +21,7 @@ export const Button: FunctionComponent<Props> = ({
   variant = ButtonVariants.default,
   onClick,
   children,
+  block = false,
   style,
 }) => {
   const ref = createRef()
@@ -39,7 +41,7 @@ export const Button: FunctionComponent<Props> = ({
 
   return (
     <div
-      className={styles.hole}
+      className={cn(styles.hole, block && styles.block)}
       {...squircleProps}
       onClick={onClick}
       style={style}

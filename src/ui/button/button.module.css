@@ -2,8 +2,8 @@
   --height: 10px;
   --color: white;
 
-  min-width: 32px;
-  min-height: 32px;
+  min-width: 18vmin;
+  min-height: 18vmin;
   white-space: nowrap;
   border: none;
   width: 100%;
@@ -11,6 +11,10 @@
   position: relative;
   background: var(--color);
   mask-repeat: no-repeat;
+}
+
+.block{
+  width:100%;
 }
 
 .text {
