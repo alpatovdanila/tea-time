@@ -1,13 +1,16 @@
-import caution from './almost.wav'
-import ding from './done.wav'
+import single from './single.wav'
+import doubleFast from './doubleFast.wav'
+import doubleSlow from './doubleSlow.wav'
 import { createSoundManager } from '../../lib/soundManager'
 
 export enum Sound {
-  ding,
-  caution,
+  doubleSlow,
+  doubleFast,
+  single,
 }
 
 export const soundManager = createSoundManager({
-  [Sound.caution]: caution,
-  [Sound.ding]: ding,
+  [Sound.doubleSlow]: doubleSlow,
+  [Sound.doubleFast]: doubleFast,
+  [Sound.single]: single,
 })
