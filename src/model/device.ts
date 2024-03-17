@@ -6,19 +6,23 @@ import { lockScreenSleep, vibrate } from '../lib/device'
 let revokeScreenSleepLock: null | (() => void) = null
 
 counter.nearEnded.addListener(async () => {
-  if ($soundEnabled.get()) soundManager.play(Sound.caution)
+  if ($soundEnabled.get()) soundManager.play(Sound.doubleFast)
   if ($vibrationEnabled.get()) vibrate(300)
 })
 
 counter.ended.addListener(() => {
   if ($soundEnabled.get()) {
-    soundManager.play(Sound.ding)
+    soundManager.play(Sound.doubleSlow)
   }
   if ($vibrationEnabled.get()) vibrate(500)
 })
 
 $vibrationEnabled.addListener((enabled) => {
   if (enabled) vibrate(300)
+})
+
+$soundEnabled.addListener((enabled) => {
+  if (enabled) soundManager.play(Sound.single)
 })
 
 counter.started.addListener(async () => {
