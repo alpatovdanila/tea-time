@@ -9,12 +9,14 @@ type CountDownOptions = {
 }
 
 export type CountDownState = {
+  isRunning: boolean
   passed: number
   total: number
   left: number
 }
 
 export const initialState = {
+  isRunning: false,
   passed: 0,
   total: 0,
   left: 0,
@@ -70,9 +72,21 @@ export const createCountDown = ({
     })
   }
 
-  const stopTicking = () => interval && interval()
+  const stopTicking = () => {
+    state.set((old) => ({
+      ...old,
+      isRunning: false,
+    }))
+
+    interval && interval()
+  }
 
   const startTicking = () => {
+    state.set((old) => ({
+      ...old,
+      isRunning: true,
+    }))
+
     started()
     interval = setPreciseInterval(tick, tickInterval)
   }

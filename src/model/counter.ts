@@ -9,7 +9,14 @@ export const counter = createCountDown({
 })
 
 export const add = counter.add
-export const reset = counter.clear
+
+export const reset = () => {
+  if (counter.state.get().isRunning) {
+    counter.clear()
+  } else {
+    $previous.set(() => 0)
+  }
+}
 
 export const $counter = counter.state
 export const $previous = createPersistedStore(0, 'lastCounter')
